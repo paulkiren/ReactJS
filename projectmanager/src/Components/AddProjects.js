@@ -10,13 +10,28 @@ class AddProjects extends Component {
     };
   }
   handleSubmit(e) {
-    console.log("Submitted ", this.refs);
+    if (this.refs.title.value === "") {
+      alert("Title is required");
+    } else {
+      this.setState(
+        {
+          newProject: {
+            title: this.refs.title.value,
+            category: this.refs.category.value
+          }
+        },
+        function() {
+          console.log(this.state);
+          this.props.addProjects(this.state.newProject);
+        }
+      );
+    }
     e.preventDefault();
   }
   render() {
     let catMap = this.props.categories.map(category => {
       return (
-        <option key={category} value="category">
+        <option key={category} value={category}>
           {category}
         </option>
       );

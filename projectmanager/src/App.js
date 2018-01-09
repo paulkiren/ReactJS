@@ -20,10 +20,16 @@ class App extends Component {
       ]
     });
   }
+  handleAddProject(newProject) {
+    console.log("Ne ", newProject);
+    const projects = this.state.projects;
+    projects.push(newProject);
+    this.setState({ projects: projects });
+  }
   render() {
     return (
       <div className="App">
-        <AddProjects/>
+        <AddProjects addProjects={this.handleAddProject.bind(this)} />
         <Projects projects={this.state.projects} />
       </div>
     );
