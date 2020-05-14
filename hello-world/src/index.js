@@ -1,21 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
+import {PageHeader, ShoppingList} from './chapterOne';
 
-// class ShoppingList extends React.Component {
-//   render() {
-//     return (
-//       <div className="shopping-list">
-//         <h1> Shopping List for {this.props.name} </h1>
-//         <ul>
-//           <li>FaceBook</li>
-//           <li>Twitter</li>
-//           <li>Instagram</li>
-//         </ul>
-//       </div>
-//     );
-//   }
-// }
+
 
 function Square(props) {
   return (
@@ -83,7 +71,7 @@ class Game extends React.Component {
           <Board />
         </div>
         <div className="game-info">
-          <div>{/* status */}</div>
+          <div> <ShoppingList/> {/* status */}</div>
           <ol>{/* TODO */}</ol>
         </div>
       </div>
