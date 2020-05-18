@@ -30,7 +30,7 @@ class ShoppingList extends React.Component {
     render() {
         return (
             <div className="shopping-list">
-            <Header></Header>
+                <Header></Header>
                 <h1> Shopping List for {this.props.name} </h1>
                 <ul>
                     <li>FaceBook</li>
@@ -43,15 +43,25 @@ class ShoppingList extends React.Component {
 }
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            time: new Date().toLocaleString()
+        }
+        setInterval(() => {
+            this.setState({ time: new Date().toLocaleString() })
+        }, 1000);
+    }
+
     render() {
         return (
-            <div color="green"> <h1>Kiren paul</h1> </div>
+            <div color="green"> <h1>Time is : {this.state.time}</h1> </div>
         );
     }
 }
 
 
-export  {
+export {
     ShoppingList,
     PageHeader
 }
