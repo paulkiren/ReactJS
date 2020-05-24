@@ -34,7 +34,7 @@ function NumButton(props) {
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { historyItems: [], text: '', currentValue: '', resultValue: 0 };
+        this.state = { historyItems: [], text: '', currentValue: '', resultValue: 0, expressionString: '', expressionStack: [] };
         // this.handleChange = this.handleChange.bind(this);
         this.handleArithmeticOps = this.handleArithmeticOps.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,10 +43,22 @@ class Calculator extends React.Component {
         this.handleDecimal = this.handleDecimal.bind(this);
     }
 
-    handleArithmeticOps (e) {
+    handleArithmeticOps(e) {
         e.preventDefault();
         console.log(e.target.value);
         let value = e.target.value;
+        let currValue = this.state.currentValue;
+
+
+        this.setState(state => ({
+            expressionStack: state.expressionStack.concat([currValue, value]),
+            currentValue: ''
+        }));
+
+
+
+
+
 
     }
     handleDecimal(e) {
@@ -71,6 +83,7 @@ class Calculator extends React.Component {
                 <h3>Caluculator</h3>
 
                 <HistoryExpressionList historyItems={this.state.historyItems} />
+                <div>{() => this.state.expressionStack.concat(' ')}</div>
                 <input value={this.state.currentValue} />
                 <input value={this.state.resultValue} />
                 <div className="caluculator-keys">
