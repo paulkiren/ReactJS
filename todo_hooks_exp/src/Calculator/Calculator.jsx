@@ -12,63 +12,78 @@ function NumButton(props) {
 
 }
 
-class NummberPad extends React.Component {
+// class FunctionKeys extends React.Component {
+//     render() {
+//         return (
 
-    renederButton(i) {
-        return <NumButton value={i}
-            onClick={this.props.onClick}></NumButton>
 
-    }
+//         )
+//     }
+// }
 
-    render() {
-        // console.log("test LLLL",this.props);
-        return (<div>
-            <div>
-                {[7, 8, 9].map((i) => this.renederButton(i))}
-            </div>
-            <div>
-                {[4, 5, 6].map((i) => this.renederButton(i))}
-            </div>
-            <div>
-                {[1, 2, 3].map((i) => this.renederButton(i))}
-            </div>
-            <div>
-                {[0, '.', '='].map((i) => this.renederButton(i))}
-            </div>
+// class NummberPad extends React.Component {
 
-        </div>)
-    }
 
-}
+//     render() {
+//         // console.log("test LLLL",this.props);
+//         return ()
+//     }
+
+// }
 
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], text: '' };
+        this.state = { items: [], text: '', currentValue: '', resultValue: 0 };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.numberClick = this.numberClick.bind(this);
+        this.functionClick = this.functionClick.bind(this);
     }
+    renederButton(i) {
+        return <NumButton value={i}
+            onClick={this.numberClick}></NumButton>
 
+    }
     render() {
         return (
             <div>
                 <h3>Caluculator</h3>
+
                 <HistoryExpressionList items={this.state.items} />
-                <NummberPad value={this.state.items + 1} onClick={this.numberClick}></NummberPad>
-                <form >
-                    <label htmlFor="new-todo">
-                        What needs to be done?
-            </label>
-                    <input
-                        id="new-todo"
-                        onChange={this.handleChange}
-                        value={this.state.text}
-                    />
-                    <button onClick={this.handleSubmit}>
-                        Add #{this.state.items.length + 1}
-                    </button>
-                </form>
+                <input value={this.state.currentValue} />
+                <input value={this.state.resultValue} />
+                <div className="caluculator-keys">
+                    <div className="number-pad">
+                        <div >
+                            {[7, 8, 9].map((i) => this.renederButton(i))}
+                        </div>
+                        <div>
+                            {[4, 5, 6].map((i) => this.renederButton(i))}
+                        </div>
+                        <div>
+                            {[1, 2, 3].map((i) => this.renederButton(i))}
+                        </div>
+                        <div>
+                            {[0, '.', '='].map((i) => this.renederButton(i))}
+                        </div>
+
+                    </div>
+                    <div className="arithmetic-ops">
+                        <button className="functionButton"
+                            value='<-' onClick={this.functionClick}>Clear</button>
+                        <button className="functionButton"
+                            value='/' onClick={this.functionClick}>/</button>
+                        <button className="functionButton"
+                            value='x' onClick={this.functionClick}>x</button>
+                        <button className="functionButton"
+                            value='-' onClick={this.functionClick}>-</button>
+                        <button className="functionButton"
+                            value='+' onClick={this.functionClick}>+</button>
+
+                    </div>
+
+                </div>
             </div>
         );
     }
@@ -76,11 +91,19 @@ class Calculator extends React.Component {
     handleChange(e) {
         this.setState({ text: e.target.value });
     }
+
+    functionClick(e) {
+        e.preventDefault();
+        console.log(e.target.value);
+        let value = e.target.value;
+        this.setState({ currentValue: this.state.currentValue += value });
+
+    }
     numberClick(e) {
         e.preventDefault();
         console.log(e.target.value);
-
-
+        let value = e.target.value;
+        this.setState({ currentValue: this.state.currentValue += value });
 
     }
 
