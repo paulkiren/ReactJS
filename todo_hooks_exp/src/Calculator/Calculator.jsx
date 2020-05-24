@@ -2,53 +2,40 @@ import React from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 
-class Calculator2 extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], text: '' };
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
-    }
 
-    render() {
-        return (
-            <div className="Calculator">
-                <header className="App-header">
-                    <p>
-                        Calculator is coming
-                   </p>
+function NumButton(props) {
+    return (
+        <button className="numButton"
+            value={props.value}
+            onClick={props.onClick}>{props.value}</button>
+    );
 
-                </header>
-                <div > Ki</div>
-
-                <NummberPad></NummberPad>
-            </div>
-        );
-    }
 }
 
 class NummberPad extends React.Component {
+
+    renederButton(i) {
+        return <NumButton value={i}
+            onClick={this.props.onClick}></NumButton>
+
+    }
+
     render() {
+        // console.log("test LLLL",this.props);
         return (<div>
             <div>
-                <button onClick={this.props.handleNumClick}>7</button>
-                <button>8</button>
-                <button>9</button>
+                {[7, 8, 9].map((i) => this.renederButton(i))}
+
+
             </div>
             <div>
-                <button>4</button>
-                <button>5</button>
-                <button>6</button>
+                {[4, 5, 6].map((i) => this.renederButton(i))}
             </div>
             <div>
-                <button >1</button>
-                <button>2</button>
-                <button>3</button>
+                {[1, 2, 3].map((i) => this.renederButton(i))}
             </div>
             <div>
-                <button >0</button>
-                <button >.</button>
-                <button >=</button>
+                {[0, '.', '='].map((i) => this.renederButton(i))}
             </div>
 
         </div>)
@@ -62,16 +49,16 @@ class Calculator extends React.Component {
         this.state = { items: [], text: '' };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.numberClick = this.numberClicked.bind(this);
+        this.numberClick = this.numberClick.bind(this);
     }
 
     render() {
         return (
             <div>
-                <h3>TODO</h3>
-                <NummberPad handleNumClick={this.state.numberClicked}></NummberPad>
-                <TodoList items={this.state.items} />
-                <form onSubmit={this.handleSubmit}>
+                <h3>Caluculator</h3>
+                <HistoryExpressionList items={this.state.items} />
+                <NummberPad value={this.state.items + 1} onClick={this.numberClick}></NummberPad>
+                <form >
                     <label htmlFor="new-todo">
                         What needs to be done?
             </label>
@@ -80,7 +67,7 @@ class Calculator extends React.Component {
                         onChange={this.handleChange}
                         value={this.state.text}
                     />
-                    <button>
+                    <button onClick={this.handleSubmit}>
                         Add #{this.state.items.length + 1}
                     </button>
                 </form>
@@ -91,10 +78,10 @@ class Calculator extends React.Component {
     handleChange(e) {
         this.setState({ text: e.target.value });
     }
-    numberClicked(e) {
+    numberClick(e) {
         e.preventDefault();
         console.log(e.target.value);
-        alert('clicked button');
+
 
 
     }
@@ -116,7 +103,7 @@ class Calculator extends React.Component {
     }
 }
 
-class TodoList extends React.Component {
+class HistoryExpressionList extends React.Component {
     render() {
         return (
             <ul>
@@ -128,3 +115,32 @@ class TodoList extends React.Component {
     }
 }
 export default Calculator;
+
+
+
+
+
+// class Calculator2 extends React.Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = { items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], text: '' };
+//         // this.handleChange = this.handleChange.bind(this);
+//         // this.handleSubmit = this.handleSubmit.bind(this);
+//     }
+
+//     render() {
+//         return (
+//             <div className="Calculator">
+//                 <header className="App-header">
+//                     <p>
+//                         Calculator is coming
+//                    </p>
+
+//                 </header>
+//                 <div > Ki</div>
+
+//                 <NummberPad></NummberPad>
+//             </div>
+//         );
+//     }
+// }
