@@ -6,8 +6,9 @@
 .caluculator-keys {
   background-color: transparent;
 }
-
-
+/* .number-pad {
+  min-width: 180px;
+} */
 .currentValue {
   height: auto;
   width: 90%;
@@ -17,12 +18,32 @@
   color: #1A1A1A;
   text-align: end;
 }
+.flex-column {
+
+    display: flex;
+    flex-direction: column;
+
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+/* .function-column {
+  min-width: 60px;
+} */
 
 .numButton {
   height: 100px;
-  width: 60px;
+  width: 25%;
+  min-width: 60px;
   border: 0px solid green;
-  ;
+}
+.funcButton {
+  height: 80px;
+  min-width: 60px;
+  width:auto;
+  border: 0px solid green;
 }
 
 

@@ -28,14 +28,17 @@ class Calculator extends React.Component {
         e.preventDefault();
         console.log(e.target.value);
         let value = e.target.value;
-        let currValue = this.state.currentValue;
+        this.state.expressionStack.concat(this.state.currentValue, value);
+        let expressionValue = this.state.expressionStack.join(' ');
 
-        this.setState(state => ({
-            expressionStack: state.expressionStack.concat([currValue, value]),
-            currentValue: ''
-        }));
+        // this.setState(state => ({
+        //     expressionStack: stack,
+        //     currentValue: stack,
+        //     expressionString:expressionValue
+        // }));
+        this.setState({ expressionString: expressionValue, currentValue: '' });
 
-        this.setState({ expressionString: this.state.expressionStack.concat(' ') });
+
 
     }
     handleDecimal(e) {
@@ -50,7 +53,6 @@ class Calculator extends React.Component {
     renederButton(i) {
         return <NumButton value={i}
             onClick={this.numberClick}></NumButton>
-
     }
     render() {
         return (
@@ -61,8 +63,8 @@ class Calculator extends React.Component {
                 <div>{this.state.expressionString}</div>
                 <input className="currentValue" value={this.state.currentValue} />
                 <input className="currentValue" value={this.state.resultValue} />
-                <div className="caluculator-keys">
-                    <div className="number-pad">
+                <div className="caluculator-keys flex-row">
+                    <div className="number-pad flex-column">
                         <div >
                             {[7, 8, 9].map((i) => this.renederButton(i))}
                         </div>
@@ -79,23 +81,22 @@ class Calculator extends React.Component {
                             <button className="numButton"
                                 value='=' onClick={this.handleSubmit}>=</button>
                         </div>
-                        <div >
-                            <button className="numButton"
-                                value='clear' onClick={this.functionClick}>Clear</button>
-                            <button className="numButton"
-                                value='/' onClick={this.handleArithmeticOps}>/</button>
-                            <button className="numButton"
-                                value='x' onClick={this.handleArithmeticOps}>x</button>
-                            <button className="numButton"
-                                value='-' onClick={this.handleArithmeticOps}>-</button>
-                            <button className="numButton"
-                                value='+' onClick={this.handleArithmeticOps}>+</button>
 
-                        </div>
 
                     </div>
+                    <div className="flex-column function-column">
+                        <button className="funcButton"
+                            value='clear' onClick={this.functionClick}>Clear</button>
+                        <button className="funcButton"
+                            value='/' onClick={this.handleArithmeticOps}>/</button>
+                        <button className="funcButton"
+                            value='x' onClick={this.handleArithmeticOps}>x</button>
+                        <button className="funcButton"
+                            value='-' onClick={this.handleArithmeticOps}>-</button>
+                        <button className="funcButton"
+                            value='+' onClick={this.handleArithmeticOps}>+</button>
 
-
+                    </div>
                 </div>
             </div>
         );
@@ -154,32 +155,3 @@ class HistoryExpressionList extends React.Component {
     }
 }
 export default Calculator;
-
-
-
-
-
-// class Calculator2 extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = { historyItems: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], text: '' };
-//         // this.handleChange = this.handleChange.bind(this);
-//         // this.handleSubmit = this.handleSubmit.bind(this);
-//     }
-
-//     render() {
-//         return (
-//             <div className="Calculator">
-//                 <header className="App-header">
-//                     <p>
-//                         Calculator is coming
-//                    </p>
-
-//                 </header>
-//                 <div > Ki</div>
-
-//                 <NummberPad></NummberPad>
-//             </div>
-//         );
-//     }
-// }
