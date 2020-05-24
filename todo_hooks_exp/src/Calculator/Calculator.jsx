@@ -55,6 +55,9 @@ class Calculator extends React.Component {
             currentValue: ''
         }));
 
+        this.setState({ expressionString: this.state.expressionStack.concat(' ') });
+
+
 
 
 
@@ -83,9 +86,9 @@ class Calculator extends React.Component {
                 <h3>Caluculator</h3>
 
                 <HistoryExpressionList historyItems={this.state.historyItems} />
-                <div>{() => this.state.expressionStack.concat(' ')}</div>
-                <input value={this.state.currentValue} />
-                <input value={this.state.resultValue} />
+                <div>{this.state.expressionString}</div>
+                <input className="currentValue" value={this.state.currentValue} />
+                <input className="currentValue" value={this.state.resultValue} />
                 <div className="caluculator-keys">
                     <div className="number-pad">
                         <div >
@@ -104,21 +107,22 @@ class Calculator extends React.Component {
                             <button className="numButton"
                                 value='=' onClick={this.handleSubmit}>=</button>
                         </div>
+                        <div >
+                            <button className="numButton"
+                                value='clear' onClick={this.functionClick}>Clear</button>
+                            <button className="numButton"
+                                value='/' onClick={this.handleArithmeticOps}>/</button>
+                            <button className="numButton"
+                                value='x' onClick={this.handleArithmeticOps}>x</button>
+                            <button className="numButton"
+                                value='-' onClick={this.handleArithmeticOps}>-</button>
+                            <button className="numButton"
+                                value='+' onClick={this.handleArithmeticOps}>+</button>
+
+                        </div>
 
                     </div>
-                    <div className="arithmetic-ops">
-                        <button className="functionButton"
-                            value='clear' onClick={this.functionClick}>Clear</button>
-                        <button className="functionButton"
-                            value='/' onClick={this.handleArithmeticOps}>/</button>
-                        <button className="functionButton"
-                            value='x' onClick={this.handleArithmeticOps}>x</button>
-                        <button className="functionButton"
-                            value='-' onClick={this.handleArithmeticOps}>-</button>
-                        <button className="functionButton"
-                            value='+' onClick={this.handleArithmeticOps}>+</button>
 
-                    </div>
 
                 </div>
             </div>
@@ -160,7 +164,8 @@ class Calculator extends React.Component {
             historyItems: state.historyItems.concat(newItem),
             text: ''
         }));
-        this.setState({ currentValue: '' });
+        this.setState({ currentValue: '' , });
+        
 
     }
 }

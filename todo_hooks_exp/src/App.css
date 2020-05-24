@@ -2,14 +2,22 @@
   text-align: center;
 
 }
+
 .caluculator-keys {
-  float: left;
+  background-color: transparent;
 }
-.caluculator-keys:after {
-  clear: both;
-  content: "";
-  display: table;
+
+
+.currentValue {
+  height: auto;
+  width: 90%;
+  padding: 9px;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1A1A1A;
+  text-align: end;
 }
+
 .numButton {
   height: 100px;
   width: 60px;
@@ -17,33 +25,6 @@
   ;
 }
 
-.number-pad {
-  max-width: 180px;
-
-}
-
-.arithmetic-ops {
-  max-width: 60px;
-
-
-}
-
-.functionButton {
-  height: 80px;
-  width: 60px;
-  border: 0px solid green;
-  ;
-}
-
-.Calculator {
-
-  background-color: crimson;
-}
-
-.Calculator .App-header {
-
-  background-color: crimson;
-}
 
 .App-logo {
   height: 40vmin;
@@ -59,7 +40,7 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
