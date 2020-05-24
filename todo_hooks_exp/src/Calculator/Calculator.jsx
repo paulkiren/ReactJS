@@ -12,25 +12,6 @@ function NumButton(props) {
 
 }
 
-// class FunctionKeys extends React.Component {
-//     render() {
-//         return (
-
-
-//         )
-//     }
-// }
-
-// class NummberPad extends React.Component {
-
-
-//     render() {
-//         // console.log("test LLLL",this.props);
-//         return ()
-//     }
-
-// }
-
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
@@ -49,19 +30,12 @@ class Calculator extends React.Component {
         let value = e.target.value;
         let currValue = this.state.currentValue;
 
-
         this.setState(state => ({
             expressionStack: state.expressionStack.concat([currValue, value]),
             currentValue: ''
         }));
 
         this.setState({ expressionString: this.state.expressionStack.concat(' ') });
-
-
-
-
-
-
 
     }
     handleDecimal(e) {
@@ -72,8 +46,6 @@ class Calculator extends React.Component {
         if (this.state.currentValue.indexOf('.') !== -1)
             return
         this.setState({ currentValue: this.state.currentValue += value });
-
-
     }
     renederButton(i) {
         return <NumButton value={i}
@@ -164,8 +136,8 @@ class Calculator extends React.Component {
             historyItems: state.historyItems.concat(newItem),
             text: ''
         }));
-        this.setState({ currentValue: '' , });
-        
+        this.setState({ currentValue: '', });
+
 
     }
 }
