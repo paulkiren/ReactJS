@@ -39,6 +39,18 @@ class Calculator extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.numberClick = this.numberClick.bind(this);
         this.functionClick = this.functionClick.bind(this);
+        this.handleDecimal = this.handleDecimal.bind(this);
+    }
+    handleDecimal(e) {
+        // only one decimal is allowed per number;
+        e.preventDefault();
+        console.log(e.target.value);
+        let value = e.target.value;
+        if (this.state.currentValue.indexOf('.') !== -1)
+            return
+        this.setState({ currentValue: this.state.currentValue += value });
+
+
     }
     renederButton(i) {
         return <NumButton value={i}
@@ -65,7 +77,11 @@ class Calculator extends React.Component {
                             {[1, 2, 3].map((i) => this.renederButton(i))}
                         </div>
                         <div>
-                            {[0, '.', '='].map((i) => this.renederButton(i))}
+                            {[0].map((i) => this.renederButton(i))}
+                            <button className="numButton"
+                                value='.' onClick={this.handleDecimal}>.</button>
+                            <button className="numButton"
+                                value='=' onClick={this.handleSubmit}>=</button>
                         </div>
 
                     </div>
@@ -110,17 +126,21 @@ class Calculator extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         console.log(e.target.value);
-        if (this.state.text.length === 0) {
+        if (this.state.currentValue.length === 0) {
             return;
         }
+
+
         const newItem = {
-            text: this.state.text,
+            text: this.state.currentValue,
             id: Date.now()
         };
         this.setState(state => ({
             items: state.items.concat(newItem),
             text: ''
         }));
+        this.setState({ currentValue:''});
+
     }
 }
 
