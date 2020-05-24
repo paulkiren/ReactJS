@@ -25,8 +25,6 @@ class NummberPad extends React.Component {
         return (<div>
             <div>
                 {[7, 8, 9].map((i) => this.renederButton(i))}
-
-
             </div>
             <div>
                 {[4, 5, 6].map((i) => this.renederButton(i))}
