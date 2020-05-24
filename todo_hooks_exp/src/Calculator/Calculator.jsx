@@ -34,12 +34,20 @@ function NumButton(props) {
 class Calculator extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { items: [], text: '', currentValue: '', resultValue: 0 };
-        this.handleChange = this.handleChange.bind(this);
+        this.state = { historyItems: [], text: '', currentValue: '', resultValue: 0 };
+        // this.handleChange = this.handleChange.bind(this);
+        this.handleArithmeticOps = this.handleArithmeticOps.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.numberClick = this.numberClick.bind(this);
         this.functionClick = this.functionClick.bind(this);
         this.handleDecimal = this.handleDecimal.bind(this);
+    }
+
+    handleArithmeticOps (e) {
+        e.preventDefault();
+        console.log(e.target.value);
+        let value = e.target.value;
+
     }
     handleDecimal(e) {
         // only one decimal is allowed per number;
@@ -62,7 +70,7 @@ class Calculator extends React.Component {
             <div>
                 <h3>Caluculator</h3>
 
-                <HistoryExpressionList items={this.state.items} />
+                <HistoryExpressionList historyItems={this.state.historyItems} />
                 <input value={this.state.currentValue} />
                 <input value={this.state.resultValue} />
                 <div className="caluculator-keys">
@@ -87,15 +95,15 @@ class Calculator extends React.Component {
                     </div>
                     <div className="arithmetic-ops">
                         <button className="functionButton"
-                            value='<-' onClick={this.functionClick}>Clear</button>
+                            value='clear' onClick={this.functionClick}>Clear</button>
                         <button className="functionButton"
-                            value='/' onClick={this.functionClick}>/</button>
+                            value='/' onClick={this.handleArithmeticOps}>/</button>
                         <button className="functionButton"
-                            value='x' onClick={this.functionClick}>x</button>
+                            value='x' onClick={this.handleArithmeticOps}>x</button>
                         <button className="functionButton"
-                            value='-' onClick={this.functionClick}>-</button>
+                            value='-' onClick={this.handleArithmeticOps}>-</button>
                         <button className="functionButton"
-                            value='+' onClick={this.functionClick}>+</button>
+                            value='+' onClick={this.handleArithmeticOps}>+</button>
 
                     </div>
 
@@ -104,9 +112,9 @@ class Calculator extends React.Component {
         );
     }
 
-    handleChange(e) {
-        this.setState({ text: e.target.value });
-    }
+    // handleChange(e) {
+    //     this.setState({ text: e.target.value });
+    // }
 
     functionClick(e) {
         e.preventDefault();
@@ -136,10 +144,10 @@ class Calculator extends React.Component {
             id: Date.now()
         };
         this.setState(state => ({
-            items: state.items.concat(newItem),
+            historyItems: state.historyItems.concat(newItem),
             text: ''
         }));
-        this.setState({ currentValue:''});
+        this.setState({ currentValue: '' });
 
     }
 }
@@ -148,7 +156,7 @@ class HistoryExpressionList extends React.Component {
     render() {
         return (
             <ul>
-                {this.props.items.map(item => (
+                {this.props.historyItems.map(item => (
                     <li key={item.id}>{item.text}</li>
                 ))}
             </ul>
@@ -164,7 +172,7 @@ export default Calculator;
 // class Calculator2 extends React.Component {
 //     constructor(props) {
 //         super(props);
-//         this.state = { items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], text: '' };
+//         this.state = { historyItems: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0], text: '' };
 //         // this.handleChange = this.handleChange.bind(this);
 //         // this.handleSubmit = this.handleSubmit.bind(this);
 //     }
