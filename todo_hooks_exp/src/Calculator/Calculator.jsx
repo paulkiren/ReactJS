@@ -23,11 +23,41 @@ class Calculator extends React.Component {
         this.functionClick = this.functionClick.bind(this);
         this.handleDecimal = this.handleDecimal.bind(this);
     }
+    add(a, b) {
+        console.log(a,b);
+        return parseInt(a, 10) + parseInt(b, 10);
+    }
+    subtract(a, b) {
+        return a - b;
+    }
+    divide(a, b) {
+        return a / b;
+    }
+    multiply(a, b) {
+        return a * b;
+    }
 
     handleArithmeticOps(e) {
         e.preventDefault();
         console.log(e.target.value);
         let value = e.target.value;
+        switch (value) {
+            case '+':
+                this.state.resultValue = this.add(this.state.resultValue, this.state.currentValue);
+                break;
+            case '-':
+                this.state.resultValue = this.subtract(this.state.resultValue, this.state.currentValue);
+                break;
+            case '*':
+                this.state.resultValue = this.multiply(this.state.resultValue, this.state.currentValue);
+                break;
+            case '/':
+                this.state.resultValue = this.divide(this.state.resultValue, this.state.currentValue);
+                break;
+
+            default:
+                break;
+        }
         this.state.expressionStack.concat(this.state.currentValue, value);
         let expressionValue = this.state.expressionStack.join(' ');
 
